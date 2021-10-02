@@ -1,0 +1,10 @@
+,Day,High temperature,Low temperature,Description
+0,NOW until9:00am Sat,,,Dense Fog Advisory
+1,Overnight,,"<p class=""temp temp-low"">Low: 59 °F</p>",Partly Cloudy
+2,Saturday,"<p class=""temp temp-high"">High: 87 °F</p>",,Sunny
+3,SaturdayNight,,"<p class=""temp temp-low"">Low: 61 °F</p>",Mostly Clearthen PatchyDense Fog
+4,Sunday,"<p class=""temp temp-high"">High: 88 °F</p>",,Patchy DenseFog thenSunny
+5,SundayNight,,"<p class=""temp temp-low"">Low: 63 °F</p>",Partly Cloudythen PatchyFog
+6,Monday,"<p class=""temp temp-high"">High: 85 °F</p>",,Patchy Fogthen SlightChanceShowers
+7,MondayNight,,"<p class=""temp temp-low"">Low: 62 °F</p>",Slight ChanceShowers
+8,Tuesday,"<p class=""temp temp-high"">High: 76 °F</p>",,Partly Sunny
