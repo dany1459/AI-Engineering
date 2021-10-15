@@ -67,9 +67,9 @@ def tranform_places_genres(df):
     places_rating = {}
     places_counts = {}
 
-    genres,places,avg_rating = df.genres, df.places, df.avg_rating
+    genres,places,minmax_norm_ratings = df.genres, df.places, df.minmax_norm_ratings
 
-    for id in range(len(avg_rating)):
+    for id in range(len(minmax_norm_ratings)):
         clean_genre = ast.literal_eval(genres[id])
         clean_places = ast.literal_eval(places[id])
         if len(clean_genre) != 0:
@@ -77,9 +77,9 @@ def tranform_places_genres(df):
                 for i in ng.split('>'):
                     genr = i.strip()
                     if genr in genres_rating:
-                        genres_rating[genr].append(avg_rating[id])
+                        genres_rating[genr].append(minmax_norm_ratings[id])
                     else:
-                        genres_rating[genr] = [avg_rating[id]]
+                        genres_rating[genr] = [minmax_norm_ratings[id]]
                     if genr in genres_counts:
                         genres_counts[genr] += 1
                     else:
@@ -89,9 +89,9 @@ def tranform_places_genres(df):
             for cp in clean_places:
                 plac = cp.strip()
                 if plac in places_rating:
-                    places_rating[plac].append(avg_rating[id])
+                    places_rating[plac].append(minmax_norm_ratings[id])
                 else:
-                    places_rating[plac] = [avg_rating[id]]
+                    places_rating[plac] = [minmax_norm_ratings[id]]
                 if plac in places_counts:
                     places_counts[plac] += 1
                 else:
@@ -103,7 +103,7 @@ def tranform_places_genres(df):
 
     dic_genres_rating = dict(zip(genres_rating.keys(), genres_rating.values()))
     df_genres_rating = pd.DataFrame.from_dict(dic_genres_rating, orient='index',\
-        columns=['mean_ratings']).sort_values(by='mean_ratings',ascending=False)
+        columns=['minmax_norm_ratings']).sort_values(by='minmax_norm_ratings',ascending=False)
     
 
     dic_genres_counts = dict(zip(genres_counts.keys(), genres_counts.values()))
@@ -116,10 +116,11 @@ def tranform_places_genres(df):
 
     dic_places_rating = dict(zip(places_rating.keys(), places_rating.values()))
     df_places_rating = pd.DataFrame.from_dict(dic_places_rating, orient='index',\
-        columns=['mean_ratings']).sort_values(by='mean_ratings',ascending=False)
+        columns=['minmax_norm_ratings']).sort_values(by='minmax_norm_ratings',ascending=False)
 
     dic_places_counts = dict(zip(places_counts.keys(), places_counts.values()))
     df_places_counts = pd.DataFrame.from_dict(dic_places_counts, orient='index',\
         columns=['total_counts']).sort_values(by='total_counts',ascending=False)
 
     return df_genres_rating, df_genres_counts, df_places_rating, df_places_counts
+# mean_ratings

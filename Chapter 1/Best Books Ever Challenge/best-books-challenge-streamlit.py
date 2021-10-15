@@ -72,7 +72,7 @@ st.markdown(
 logo = Image.open("books-generic_1468008c.jpg")
 st.sidebar.image(logo,use_column_width='auto')
 st.sidebar.markdown("# Best Books of all Time\n### -A Study By-")
-st.sidebar.markdown("# Anthony Nwachukwu\n# Dan Adrian\n")
+st.sidebar.markdown("# Anthony Nwachukwu\n# Dan Adrian Dobre\n")
 
 
 
@@ -85,7 +85,7 @@ st.title("A Study on the Top 5,000+ Books of all Time")
 st.subheader("Play around with the data, have some fun")
 # ,'awards_length'
 disp_options = ['url','title','author','num_reviews','num_ratings','avg_rating','num_pages','original_publish_year','series','genres','awards','places','description','book_index','minmax_norm_ratings','mean_norm_ratings']
-disp_options2 = ['title','author','avg_rating','num_pages','original_publish_year','series','genres','description']
+disp_options2 = ['title','author','avg_rating','num_pages','original_publish_year','series','genres']
 disp_options3 = ['title','author','minmax_norm_ratings','mean_norm_ratings']
 
 data = data.replace({'places': {np.nan: '[]'}})
@@ -117,7 +117,7 @@ else:
 st.subheader("Frequently occurring words in the summary")
 display_data_description = copy.deepcopy(data)
 no_words = st.slider('Number of words', 1, 100, 30)
-book_option = st.selectbox('Select title', display_data_description['title'].sort_values().unique())
+book_option = st.selectbox('Select title', display_data_description['title'].sort_values().unique(), key='PLK')
 
 word_display_data_description = text_by_image(display_data_description,book_option,no_words,30)
 
@@ -154,21 +154,21 @@ author_awards = data.groupby('author')['awards_length'].sum().sort_values(ascend
 
 y_label = "Total Number of Awards"
 x_label = "Authors"
-title = f"{no_of_authors} Authors with Most Awards"
+title = f"{no_of_authors} Authors with the Most Awards"
 
 author_awards = make_plot(author_awards, x_label, y_label, title, st, kind=charts[select_list])
 
 
 
 #plot 4
-st.subheader("Years with quality publications")
+st.subheader("Years with more quality in publications")
 
 select_list = st.selectbox('Select the plot',('Bar','Pie','Line','Horizontal Bar'),key='Line')
 charts = {'Bar':'bar','Pie':'pie','Line':'line','Horizontal Bar':'barh'}
-min_year = sorted([i for i in data.original_publish_year if i > 0])[0]
+min_year = int(sorted([i for i in data.original_publish_year if i > 0])[0])
 
-min_year = st.text_input(label= 'From', value=2000)
-max_year = st.text_input(label= 'To', value=now_year)
+min_year = st.number_input('From', min_value=1, max_value=now_year, value=1400, step=1)
+max_year = st.number_input('To', min_value=min_year+1, max_value=now_year, value=1600, step=1)
 
 year_rating = data.groupby(['original_publish_year'], as_index=False)['minmax_norm_ratings'].mean().sort_values(by='minmax_norm_ratings', ascending=False)
 year_rating = year_rating.loc[(year_rating['original_publish_year'] >= int(min_year)) & (year_rating['original_publish_year'] <= int(max_year))]
@@ -186,7 +186,7 @@ year_ratings = make_plot(year_rating, x_label, y_label, title, st, kind=charts[s
 st.subheader("Are series more loved than non-series books?")
 select_list = st.selectbox('Select the plot',('Pies','Bar'),key='Pies')
 charts = {'Pies':'pie','Bar':'bar'}
-series_ratings = data.groupby('series')['minmax_norm_ratings'].mean().sort_values( ascending=False)
+series_ratings = data.groupby('series')['minmax_norm_ratings'].mean().sort_values( ascending=True)
 y_label = "Rating"
 x_label = "Books"
 title = "Comparison by the Average Rating"
@@ -218,9 +218,9 @@ d=data[['original_publish_year','num_pages']].groupby(by='original_publish_year'
 select_list = st.selectbox('Select the plot',('Line Plot','Bar','Pie','Horizontal Bar'),key='Lines Plot')
 charts = {'Bar':'bar','Pie':'pie','Line Plot':'line','Horizontal Bar':'barh'}
 
-start = int(st.text_input(label= 'From', value=1500))
-time_interval = int(st.text_input(label= 'Year Interval', value=50))
-last = int(st.text_input(label= 'To', value=2000))
+start = st.number_input('From', min_value=1, max_value=now_year, value=1500, step=1)
+time_interval = st.number_input('Year Interval', min_value=1, max_value=now_year-1, value=50, step=1)
+last = st.number_input('To', min_value=start+1, max_value=now_year, value=2000, step=1)
 
 df_year_pages = d.groupby(pd.cut(d.index, np.arange(start-time_interval, last+time_interval, time_interval))).sum()
 y_label = "Total Number of Pages"
@@ -238,13 +238,13 @@ no_of_genres = st.slider('Select number of genres', 1, 25, 10, key='IU')
 y_label = "Genres"
 x_label = "Average Rating"
 title = f"Top {no_of_genres} Genre by Average Rating"
-genres_rating = make_plot(df_genres_rating['mean_ratings'].head(no_of_genres), x_label, y_label, title, st, kind=charts[select_list])
+genres_rating = make_plot(df_genres_rating['minmax_norm_ratings'].head(no_of_genres), x_label, y_label, title, st, kind=charts[select_list])
 
 
 
 # # plot 10 Plot Genres and their total counts
 st.subheader("Most common genres")
-select_list = st.selectbox('Select the plot',('Horizontal Bar','Bar Chart','Pie chart','Lines'),key='Pie chart')
+select_list = st.selectbox('Select the plot',('Pie chart','Horizontal Bar','Bar Chart','Lines'),key='Pie chart')
 charts = {'Bar Chart':'bar','Pie chart':'pie','Lines':'line','Horizontal Bar':'barh'}
 no_of_counts = st.slider('Select number of genres to display', 1, 25, 10,key='AS')
 y_label = "Genre"
@@ -255,14 +255,14 @@ genres_rating = make_plot(df_genres_counts['total_counts'].head(no_of_counts), x
 
 
 # # plot 11 Plot Places and their mean average ratings
-st.subheader("Locations with most loved books")
+st.subheader("Locations compared by the average rating of the books they feature in")
 select_list = st.selectbox('Select the plot',('Horizontal Bar','Bar Chart','Pie chart','Lines'),key='Bar chart')
 charts = {'Bar Chart':'bar','Pie chart':'pie','Lines':'line','Horizontal Bar':'barh'}
 no_of_places1= st.slider('Select number of locations', 1, 25, 10, key='RT')
 y_label = "Locations"
 x_label = "Average Rating"
-title = f"Top {no_of_places1} Locations by Average Rating"
-places_rating = make_plot(df_places_rating['mean_ratings'].head(no_of_places1), x_label, y_label, title, st, kind=charts[select_list])
+title = f"Top {no_of_places1} Locations"
+places_rating = make_plot(df_places_rating['minmax_norm_ratings'].head(no_of_places1), x_label, y_label, title, st, kind=charts[select_list])
 
 
 
