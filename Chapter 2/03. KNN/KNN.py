@@ -7,8 +7,8 @@ def timed():
     return time.time()
 
 class KNN:
-    def __init__(self, n):
-        self.n = n
+    def __init__(self, k):
+        self.k = k
 
     def euclidean_distances(self, v1, v2):
         return np.linalg.norm(v1-v2)
@@ -17,11 +17,11 @@ class KNN:
         self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(x,y, test_size=0.2, random_state=0)
         return self
 
-    def predict(self):
+    def predict(self, X):
         start = timed()
         labels = []
 
-        for i in self.x_test:
+        for i in X:
             distances = []
             for j in self.x_train:
                 d = self.euclidean_distances(i,j)
