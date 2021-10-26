@@ -114,3 +114,4 @@ dmypy.json
 .pyre/
 Chapter 1/IMDB Challenge/chromedriver.exe
 Chapter 1/IMDB Challenge/pandas_part (2).py
+Chapter 2/07. SVM/data/creditcard.csv
