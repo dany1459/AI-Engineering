@@ -1,19 +1,28 @@
 import pandas as pd
-from sklearn.preprocessing import OrdinalEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OrdinalEncoder, MinMaxScaler
 
-hello = "<3"
+def get_data(path):
 
-def get_data(pth):
+    data = pd.read_csv(path)
 
-    data = pd.read_csv(pth)
+    y = data.values[:,-1]
+    y = y.astype('int')
 
-    x_train, x_test, y_train, y_test = train_test_split(data.values[:,:-1], data.values[:,-1], test_size=0.2, random_state = 0)
+    x_train, x_test, y_train, y_test = train_test_split(data.values[:,:-1], y, test_size=0.2, random_state = 0)
 
-    ct = ColumnTransformer( [('ordinal', OrdinalEncoder(handle_unknown= 'use_encoded_value', unknown_value = -1), [1,4,5] )] )
+    ct = ColumnTransformer(
+                [('ordinal', 
+                OrdinalEncoder(handle_unknown= 'use_encoded_value', unknown_value = -1), 
+                [1,4,5])], 
+                remainder='passthrough')
 
     x_train = ct.fit_transform(x_train)
     x_test = ct.transform(x_test)
 
-    return x_train, x_test, y_train, y_test
+    # mm_scaler = MinMaxScaler()
+    # x_train_scaled = mm_scaler.fit_transform(x_train)
+    # x_test_scaled = mm_scaler.fit_transform(x_test)
+
+    return x_train, x_test, y_train, y_test, ct#, mm_scaler
