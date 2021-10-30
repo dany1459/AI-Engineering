@@ -1,16 +1,16 @@
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import time
+from time import time
 
 def timed():
-    return time.time()
+    return time()
 
 class KNN:
     def __init__(self, k):
         self.k = k
 
-    def euclidean_distances(self, v1, v2):
+    def __euclidean_distances(self, v1, v2):
         return np.linalg.norm(v1-v2)
 
     def fit(self, x, y):
@@ -18,21 +18,25 @@ class KNN:
         return self
 
     def predict(self, X):
+
         start = timed()
+
         labels = []
 
         for i in X:
             distances = []
             for j in self.x_train:
-                d = self.euclidean_distances(i,j)
+                d = self.__euclidean_distances(i,j)
                 distances.append(d)
 
             df = pd.DataFrame({'distances':distances, 'labels':self.y_train})
             
-            l = df.sort_values('distances').head(self.n).groupby('labels').count().sort_values('distances', ascending=False).index[0]
+            l = df.sort_values('distances').head(self.k).groupby('labels').count().sort_values('distances', ascending=False).index[0]
             labels.append(l)
 
-        stop = timed()
-        self.time_spent = stop - start
         self.labels = np.array(labels)
+
+        end = timed()
+        print('Time elapsed: {:.2f} seconds.'.format(end-start))
+        
         return self.labels
