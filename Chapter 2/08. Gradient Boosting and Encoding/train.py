@@ -1,5 +1,5 @@
 import data_handler as dh
-
+from joblib import dump
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 
 from xgboost import XGBRegressor
@@ -15,9 +15,15 @@ def train():
     xgb = XGBRegressor()
     cat = CatBoostRegressor()
 
+  
     rfc.fit(x_train, y_train)
-    gbc.fit(x_train, y_train)
-    xgb.fit(x_train, y_train)
-    cat.fit(x_train, y_train)
+    # gbc.fit(x_train, y_train)
+    # xgb.fit(x_train, y_train)
+    # cat.fit(x_train, y_train)
 
-    return rfc, gbc, xgb, cat, ct#, mm_scaler
+    # dump(rfc, 'model_rfc')
+    return rfc, ct#, gbc, ct#, xgb, cat, ct
+
+train()
+
+# dump(rfc, 'model_rfc')
