@@ -115,3 +115,7 @@ dmypy.json
 Chapter 1/IMDB Challenge/chromedriver.exe
 Chapter 1/IMDB Challenge/pandas_part (2).py
 Chapter 2/07. SVM/data/creditcard.csv
+Chapter 2/catboost_info/catboost_training.json
+Chapter 2/catboost_info/learn/events.out.tfevents
+Chapter 2/catboost_info/time_left.tsv
+Chapter 2/catboost_info/learn_error.tsv
