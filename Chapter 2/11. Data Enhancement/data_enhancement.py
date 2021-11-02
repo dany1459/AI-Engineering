@@ -55,6 +55,10 @@ print(data['hour'])
 data.drop('timestamp', axis=1, inplace=True)
 #print(data.shape)
 
+# Add a feature for apparent temperature ('feels like' temp)
+data['pressure'] = data.apply(lambda row: row['hum']/100*6.105* 1**(17.27*row['t1']/(237.7+row['t1'])), axis=1) # Necessary for calculating the apparent temperature
+data['apparent_temp'] = data.apply(lambda row: row['t1']+0.33*row['pressure']-0.7*row['wind_speed']-4 ,axis=1)
+
 
 
 
@@ -69,6 +73,7 @@ def data_enhancement(data):
         wind_speed_std = seasonal_data['wind_speed'].std()
         t1_std = seasonal_data['t1'].std()
         t2_std = seasonal_data['t2'].std()
+        t2_std = seasonal_data['apparent_temp'].std()
         
         for i in gen_data[gen_data['season'] == season].index:
             if np.random.randint(2) == 1:
@@ -90,6 +95,11 @@ def data_enhancement(data):
                 gen_data['t2'].values[i] += t2_std/10
             else:
                 gen_data['t2'].values[i] -= t2_std/10
+                
+            if np.random.randint(2) == 1:
+                gen_data['apparent_temp'].values[i] += t2_std/10
+            else:
+                gen_data['apparent_temp'].values[i] -= t2_std/10
 
     return gen_data
 
@@ -109,7 +119,7 @@ x = data.drop(['cnt'], axis=1)
 
 # Cat & Num variables to be used later
 cat_vars = ['season','is_weekend','is_holiday','year','month','weather_code']
-num_vars = ['t1','t2','hum','wind_speed']
+num_vars = ['t1','t2','hum','wind_speed','apparent_temp']
 
 x_train, x_val, y_train, y_val = model_selection.train_test_split(x, y,
                                                                 test_size=0.2,
@@ -152,13 +162,13 @@ tree_prepro = compose.ColumnTransformer(transformers=[
 # Create a dictionary with some models
 tree_classifiers = {
   "Decision Tree": DecisionTreeRegressor(),
-  "Extra Trees":   ExtraTreesRegressor(n_estimators=100),
-  "Random Forest": RandomForestRegressor(n_estimators=100),
+  "Extra Trees":   ExtraTreesRegressor(n_estimators=100, verbose=False),
+  "Random Forest": RandomForestRegressor(n_estimators=100, verbose=False),
   "AdaBoost":      AdaBoostRegressor(n_estimators=100),
-  "Skl GBM":       GradientBoostingRegressor(n_estimators=100),
+  "Skl GBM":       GradientBoostingRegressor(n_estimators=100, verbose=False),
   "XGBoost":       XGBRegressor(n_estimators=100),
   "LightGBM":      LGBMRegressor(n_estimators=100),
-  "CatBoost":      CatBoostRegressor(n_estimators=100),
+  "CatBoost":      CatBoostRegressor(n_estimators=100, verbose=False),
 }
 
 # Put each model in a pipeline
