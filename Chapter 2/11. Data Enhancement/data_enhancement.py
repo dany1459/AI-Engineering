@@ -41,7 +41,7 @@ np.random.seed(0)
 # print(target.isnull().sum())
 # print(data.isnull().sum())
 
-# create 3 new feautures
+# create 3 new features
 # Hour timestamp contains the year, the month and the hour, we will create different columns for each one
 
 data['year'] = data['timestamp'].apply(lambda row: row[:4])
