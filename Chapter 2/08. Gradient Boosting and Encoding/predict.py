@@ -1,10 +1,9 @@
 import pandas as pd
 import numpy as np
-from sklearn.metrics import accuracy_score
-import data_handler as dh
 import train as tr
 
-model = tr.train()
+model_rfc, model_xgb, model_cat, ct = tr.train()
+model = [model_rfc, model_xgb, model_cat]
 
 while True:
 
@@ -16,11 +15,10 @@ while True:
     region = str(input("Where are you from? Type in one of: 'northeast', 'northwest', southeast', southwest' \n"))
 
     new_data = pd.DataFrame({'age':age, 'sex':sex, 'bmi':bmi, 'children':children, 'smoker':smoker, 'region':region}, index=[0])
-    new_data_transformed = model[-1].transform(new_data)
+    new_data_transformed = ct.transform(new_data)
 
-    preds = model[0].predict(new_data)
-    # preds = np.array([ clf.predict(new_data) for clf in model[:2] ])
-    print(preds.mean())
-    # print(accuracy_score(preds, dh.y_test))33
-    
-    # print(new_data.head())
+    preds = np.array([clf.predict(new_data_transformed) for clf in model])
+    print(f'Random Forest Classifier predicted: {preds[0]}')
+    print(f'XGBRegressor predicted: {preds[1]}')
+    print(f'CatBoostRegressor predicted: {preds[2]}')
+    print(f'On average the prediction is: {preds.mean()}')
