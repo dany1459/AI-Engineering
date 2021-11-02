@@ -17,7 +17,8 @@ while True:
     new_data = pd.DataFrame({'age':age, 'sex':sex, 'bmi':bmi, 'children':children, 'smoker':smoker, 'region':region}, index=[0])
     new_data_transformed = ct.transform(new_data)
 
-    preds = np.array([clf.predict(new_data_transformed) for clf in model])
+    preds = np.array([ clf.predict(new_data_transformed) for clf in model ])
+
     print(f'Random Forest Classifier predicted: {preds[0]}')
     print(f'XGBRegressor predicted: {preds[1]}')
     print(f'CatBoostRegressor predicted: {preds[2]}')
