@@ -120,3 +120,8 @@ Chapter 2/catboost_info/learn/events.out.tfevents
 Chapter 2/catboost_info/time_left.tsv
 Chapter 2/catboost_info/learn_error.tsv
 Chapter 2/11. Data Enhancement/catboost_info/catboost_training.json
+Chapter 2/12. Images/catboost_info/catboost_training.json
+Chapter 2/12. Images/catboost_info/learn/events.out.tfevents
+Chapter 2/12. Images/catboost_info/learn_error.tsv
+Chapter 2/12. Images/catboost_info/time_left.tsv
+Chapter 2/catboost_info/tmp/cat_feature_index.448eaa4f-2cafa1ba-32b2b634-58e2d6f2.tmp
