@@ -16,7 +16,7 @@ from sklearn.neighbors     import KNeighborsClassifier
 from sklearn.tree          import DecisionTreeClassifier
 from sklearn.ensemble      import RandomForestClassifier
 from catboost              import CatBoostClassifier
-
+from lightgbm              import LGBMClassifier
 
 
 # ## Uncomment to create a data frame from png files
@@ -57,12 +57,13 @@ x = training_set.iloc[:,:-1]   # features var
 
 # dictionary containing all the models we want to test
 tree_classifiers = {
-  "Decision Tree": DecisionTreeClassifier(),
-  "Random Forest": RandomForestClassifier(verbose=False),
-  "CatBoost": CatBoostClassifier(verbose=False),
-  "kNN": KNeighborsClassifier(),
-  "SVC": SVC()
-} # add as many as you can afford
+        "Decision Tree": DecisionTreeClassifier(),
+        "Random Forest": RandomForestClassifier(verbose=False),
+        "CatBoost": CatBoostClassifier(verbose=False),
+        "kNN": KNeighborsClassifier(),
+        "SVC": SVC(),
+        "LightGBM": LGBMClassifier()
+}       # add as many as you can afford
 
 # define the stratified Kfold params for the cross validation
 skf = model_selection.StratifiedKFold(
@@ -79,7 +80,7 @@ results = pd.DataFrame({'Model': [],
 
 
 
-# USING CROSS VALIDATION
+# ## USING CROSS VALIDATION
 # for model_name, model in tree_classifiers.items(): # loop through all the models in the dict
     
 #     start_time = time.time()                                      # start timer
@@ -96,7 +97,7 @@ results = pd.DataFrame({'Model': [],
 
 
 
-# WITHOUT CROSS VALIDATION
+# ## WITHOUT CROSS VALIDATION
 # Split data into train & test/validation sets
 x_train, x_val, y_train, y_val = model_selection.train_test_split(
         x, y,
