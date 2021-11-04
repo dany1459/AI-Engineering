@@ -1,10 +1,6 @@
 # All imports here
 import numpy    as np
-from numpy.testing._private.utils import decorate_methods
 import pandas   as pd
-import seaborn  as sb
-import matplotlib.pyplot as plt
-import sklearn  as skl
 import time
 
 from sklearn import pipeline      # Pipeline
@@ -13,7 +9,6 @@ from sklearn import impute
 from sklearn import compose
 from sklearn import model_selection # train_test_split
 from sklearn import metrics         # accuracy_score, balanced_accuracy_score, plot_confusion_matrix
-from sklearn import set_config
 
 from sklearn.tree          import DecisionTreeRegressor
 from sklearn.ensemble      import RandomForestRegressor
@@ -32,11 +27,9 @@ np.random.seed(0)
 
 # target = data['cnt']
 # data = data.drop(['cnt'], axis=1)
-
 # Print data shape
 # print(target.shape)
 # print(data.shape)
-
 # Take a look at nulls 0 nulls
 # print(target.isnull().sum())
 # print(data.isnull().sum())
@@ -58,8 +51,6 @@ data.drop('timestamp', axis=1, inplace=True)
 # Add a feature for apparent temperature ('feels like' temp)
 data['pressure'] = data.apply(lambda row: row['hum']/100*6.105* 1**(17.27*row['t1']/(237.7+row['t1'])), axis=1) # Necessary for calculating the apparent temperature
 data['apparent_temp'] = data.apply(lambda row: row['t1']+0.33*row['pressure']-0.7*row['wind_speed']-4 ,axis=1)
-
-
 
 
 
@@ -111,8 +102,6 @@ print(gen.head(3))
 
 
 
-
-
 # Set x and y, and split them
 y = data['cnt']
 x = data.drop(['cnt'], axis=1)
@@ -125,8 +114,6 @@ x_train, x_val, y_train, y_val = model_selection.train_test_split(x, y,
                                                                 test_size=0.2,
                                                                 random_state=0  # Recommended for reproducibility
                                                             )
-
-
 
 
 
@@ -157,8 +144,6 @@ tree_prepro = compose.ColumnTransformer(transformers=[
 
 
 
-
-
 # Create a dictionary with some models
 tree_classifiers = {
   "Decision Tree": DecisionTreeRegressor(),
@@ -182,8 +167,6 @@ rang = abs(y_train.max()) + abs(y_train.min())
 
 
 
-
-
 # Train all models in a for loop and store the results
 for model_name, model in tree_classifiers.items():
     
@@ -194,8 +177,8 @@ for model_name, model in tree_classifiers.items():
     pred = model.predict(x_val)
     
     results = results.append({"Model":    model_name,
-                              "MSE": metrics.mean_squared_error(y_val, pred),
-                              "MAE": metrics.mean_absolute_error(y_val, pred),
+                              "MSE":      metrics.mean_squared_error(y_val, pred),
+                              "MAE":      metrics.mean_absolute_error(y_val, pred),
                               " % error": metrics.mean_squared_error(y_val, pred) / rang,
                               "Time":     total_time},
                               ignore_index=True)
@@ -203,8 +186,6 @@ for model_name, model in tree_classifiers.items():
 results_ord = results.sort_values(by=['MSE'], ascending=True, ignore_index=True)
 results_ord.index += 1 
 results_ord.style.bar(subset=['MSE', 'MAE'], vmin=0, vmax=100, color='#5fba7d')
-
-
 
 
 
