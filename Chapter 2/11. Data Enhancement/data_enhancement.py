@@ -171,7 +171,7 @@ rang = abs(y_train.max()) + abs(y_train.min())
 for model_name, model in tree_classifiers.items():
     
     start_time = time.time()
-    model.fit(x_train, y_train)
+    model.fit(x_train, y_train.ravel())
     total_time = time.time() - start_time
         
     pred = model.predict(x_val)
