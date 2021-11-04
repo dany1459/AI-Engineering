@@ -11,6 +11,7 @@ import pandas   as pd
 from sklearn import model_selection
 from sklearn import metrics
 
+from sklearn.naive_bayes   import MultinomialNB
 from sklearn.svm           import SVC
 from sklearn.neighbors     import KNeighborsClassifier
 from sklearn.tree          import DecisionTreeClassifier
@@ -62,6 +63,7 @@ tree_classifiers = {
         "CatBoost": CatBoostClassifier(verbose=False),
         "kNN": KNeighborsClassifier(),
         "SVC": SVC(),
+        "MultinomialNB": MultinomialNB(),
         "LightGBM": LGBMClassifier()
 }       # add as many as you can afford
 
