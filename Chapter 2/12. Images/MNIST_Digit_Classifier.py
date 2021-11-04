@@ -87,7 +87,7 @@ results = pd.DataFrame({'Model': [],
 #     pred = model_selection.cross_val_predict(model, x, y, cv=skf) # train and predict with cross_val_predict
 #     total_time = time.time() - start_time                         # time each model
     
-#     print(f'Finished {model_name}')
+#     print(f'Finished {model_name} in {round(total_time/60, 2)} minutes')
 
 #     results = results.append({"Model":  model_name,     # save the results
 #                               "Accuracy": metrics.accuracy_score(y, pred)*100,
@@ -115,7 +115,7 @@ for model_name, model in tree_classifiers.items():
 
         total_time = time.time() - start_time
 
-        print(f'Finished {model_name}')
+        print(f'Finished {model_name} in {round(total_time/60, 2)} minutes')
 
         results = results.append({"Model":  model_name,
                                   "Accuracy": metrics.accuracy_score(y_val, pred)*100,
