@@ -67,7 +67,7 @@ tree_classifiers = {
 
 # define the stratified Kfold params for the cross validation
 skf = model_selection.StratifiedKFold(
-        n_splits=5,
+        n_splits=3,
         random_state=0,
         shuffle=True
 )
