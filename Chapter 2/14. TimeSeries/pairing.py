@@ -1,9 +1,6 @@
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv('C:/Users/Igor/Documents/GitHub/AI-Engineering/Chapter 2/14. TimeSeries/climate.csv')
-data = data.drop(['Date Time'], axis=1)
-
 def pairing(data, sequence_length=6): # 0 to 5, 6 not included
     # generate sequences from first 6 rows & try to predict the next element 7th
     # measurement of 10 min --> 6 rows = 1 hour
@@ -20,9 +17,9 @@ def pairing(data, sequence_length=6): # 0 to 5, 6 not included
 
         # iterate through the seq_len to fill the sequence
         for j in range(sequence_length):
-            # i = 0,6,12,18...
-            # j = 0,1,2,3...
-            # i+j = 0,7,14,21... # first row is cols names
+            # i = 0,7,14,21...
+            # j = 0,1,2,3,4,5
+            # i+j = 8,15,22... # first row is cols names
             sequence[j] = data.values[i + j]
 
 
@@ -30,6 +27,10 @@ def pairing(data, sequence_length=6): # 0 to 5, 6 not included
         y.append(data['T (degC)'][i + sequence_length])
 
     return np.array(x), np.array(y)
+
+
+# data = pd.read_csv('C:/Users/Igor/Documents/GitHub/AI-Engineering/Chapter 2/14. TimeSeries/climate.csv')
+# data = data.drop(['Date Time'], axis=1)
 
 # print(data.shape)
 
