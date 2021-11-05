@@ -24,7 +24,7 @@ def pairing(data, sequence_length=6): # 0 to 5, 6 not included
 
 
         x.append(sequence.flatten()) # to make it 1 dimensional
-        y.append(data['T (degC)'][i + sequence_length])
+        y.append(data['Temperature'][i + sequence_length])
 
     return np.array(x), np.array(y)
 
