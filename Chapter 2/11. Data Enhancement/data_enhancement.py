@@ -64,7 +64,7 @@ def data_enhancement(data):
         wind_speed_std = seasonal_data['wind_speed'].std()
         t1_std = seasonal_data['t1'].std()
         t2_std = seasonal_data['t2'].std()
-        t2_std = seasonal_data['apparent_temp'].std()
+        t3_std = seasonal_data['apparent_temp'].std()
         
         for i in gen_data[gen_data['season'] == season].index:
             if np.random.randint(2) == 1:
@@ -88,9 +88,9 @@ def data_enhancement(data):
                 gen_data['t2'].values[i] -= t2_std/10
                 
             if np.random.randint(2) == 1:
-                gen_data['apparent_temp'].values[i] += t2_std/10
+                gen_data['apparent_temp'].values[i] += t3_std/10
             else:
-                gen_data['apparent_temp'].values[i] -= t2_std/10
+                gen_data['apparent_temp'].values[i] -= t3_std/10
 
     return gen_data
 
