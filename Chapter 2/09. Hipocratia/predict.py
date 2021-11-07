@@ -19,7 +19,7 @@ while True:
     restecg = int(input("What are your EKG results? Type in:\n'0' for 'normal',\n'1' for 'ST-T wave abnormality', or\n'2' for 'probable or definite left ventricular hypertrophy'\n"))
     thalachh = int(input("What is your maximum heart rate achieved? \n"))
     exng = str(input("Do you suffer from exercise induced angina? Type in 'yes' or 'no' \n"))
-    caa = int(input("Number of major blood vessels: type in 0,1,2 or 3 \n"))
+    caa = int(input("What is the number of major blood vessels colored by flouroscopy? Type in 0, 1, 2 or 3 \n"))
 
     ct = ColumnTransformer([
         ( 'ordinal', 
@@ -29,7 +29,8 @@ while True:
         ])
 
     new_data = pd.DataFrame({'age':age,'sex':sex,'cp':cp,'trtbps':trtbps,'chol':chol,
-                            'fbs':fbs,'restecg':restecg,'thalachh':thalachh,'exng':exng,'caa':caa}, index=[0])
+                            'fbs':fbs,'restecg':restecg,'thalachh':thalachh,'exng':exng,'caa':caa},
+                            index=[0])
 
     new_data = ct.fit_transform(new_data)
 
@@ -39,6 +40,6 @@ while True:
     preds = np.array(model.predict(new_data))
 
     if preds == 1:
-        print("You're doing great! Still get some exercise though.")
+        print("You're doing great! Still get some exercise though.\n")
     else:
-        print("You should talk to your physician.")
+        print("You should talk to your physician.\n")
