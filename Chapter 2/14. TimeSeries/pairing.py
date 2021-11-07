@@ -15,12 +15,9 @@ def pairing(data, sequence_length=6): # 0 to 5, 6 not included
         # define a sequence with seq_len rows, and data.shape[1] cols
         sequence = np.zeros( (sequence_length, data.shape[1]) )
 
-        # iterate through the seq_len to fill the sequence
+        # iterate through the seq_len to fill the sequence/matrix
         for j in range(sequence_length):
-            # i = 0,7,14,21...
-            # j = 0,1,2,3,4,5
-            # i+j = 8,15,22... # first row is cols names
-            sequence[j] = data.values[i + j]
+            sequence[j] = data.values[i + j] # fill the matrix with the data, and add i to make the jump to the next seq
 
 
         x.append(sequence.flatten()) # to make it 1 dimensional
