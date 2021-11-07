@@ -21,33 +21,27 @@ def data_enhancement(data):
         trtbps = chest_pain_type['trtbps'].std()
         chol = chest_pain_type['chol'].std()
         thalachh = chest_pain_type['thalachh'].std()
-        oldpeak = chest_pain_type['oldpeak'].std()
         
         for j in gen_data[gen_data['cp'] == i].index:
             if np.random.randint(2) == 1:
-                gen_data['age'].values[i] += age/10
+                gen_data['age'].values[j] += age/10
             else:
-                gen_data['age'].values[i] -= age/10
+                gen_data['age'].values[j] -= age/10
                 
             if np.random.randint(2) == 1:
-                gen_data['trtbps'].values[i] += trtbps/10
+                gen_data['trtbps'].values[j] += trtbps/10
             else:
-                gen_data['trtbps'].values[i] -= trtbps/10
+                gen_data['trtbps'].values[j] -= trtbps/10
                 
             if np.random.randint(2) == 1:
-                gen_data['chol'].values[i] += chol/10
+                gen_data['chol'].values[j] += chol/10
             else:
-                gen_data['chol'].values[i] -= chol/10
+                gen_data['chol'].values[j] -= chol/10
 
             if np.random.randint(2) == 1:
-                gen_data['thalachh'].values[i] += thalachh/10
+                gen_data['thalachh'].values[j] += thalachh/10
             else:
-                gen_data['thalachh'].values[i] -= thalachh/10
-                
-            if np.random.randint(2) == 1:
-                gen_data['oldpeak'].values[i] += oldpeak/10
-            else:
-                gen_data['oldpeak'].values[i] -= oldpeak/10
+                gen_data['thalachh'].values[j] -= thalachh/10
 
     return gen_data
 
