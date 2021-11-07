@@ -3,7 +3,7 @@ import pandas   as pd
 
 from sklearn.preprocessing   import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble        import ExtraTreesClassifier
+from sklearn.ensemble        import HistGradientBoostingClassifier
 
 np.random.seed(0)
 
@@ -68,7 +68,7 @@ def train():
     x_val = scaler.transform(x_val)
 
     # instantiate the best model
-    model = ExtraTreesClassifier(max_depth=10, max_features=6, min_samples_split=4, n_estimators=500,verbose=False)
+    model = HistGradientBoostingClassifier(verbose=False)
 
     # train the model
     model.fit(x_train, y_train)
