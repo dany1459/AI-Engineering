@@ -1,12 +1,11 @@
 1. - test_models.ipynb -
-   Data visualisation, preprocessing and testing and tuning models. 
-   Chose ExtraTreesClassifier because it got the highest accuracy.
+   Data visualisation, preprocessing, testing and tuning models.
 
 2. - hipocratia.py -
-   Helper file for data enhancement and training the model.
+   Helper file for data enhancement and training the best model.
 
-### work in progress
 3. - predict.py -
    Make predictions on new data.
 
+### work in progress
 4. Streamlit interface.
