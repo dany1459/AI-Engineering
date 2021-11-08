@@ -3,6 +3,7 @@ import pandas   as pd
 
 from sklearn.preprocessing   import StandardScaler
 from sklearn.model_selection import train_test_split
+from sklearn.experimental    import enable_hist_gradient_boosting
 from sklearn.ensemble        import HistGradientBoostingClassifier
 
 np.random.seed(0)
