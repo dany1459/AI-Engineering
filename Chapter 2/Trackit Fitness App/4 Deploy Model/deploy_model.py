@@ -4,7 +4,7 @@ import joblib
 from collections import Counter
 
 test_data = 'dataset_5secondWindow_TEST.csv'
-model_path = 'best_model_lgb78.pkl'
+model_path = 'model_lgb78.pkl'
 
 class Trackit:
 
@@ -51,7 +51,7 @@ class Trackit:
         d2 = np.array(self.__predictt())
 
         d_final = pd.DataFrame({'Distance': d1, 'Target': d2})
-        total_distances = d_final.groupby('Target')['Distance'].sum()
+        total_distances = round(d_final.groupby('Target')['Distance'].sum(), 2)
         total_dist = d_final['Distance'].sum().tolist()
 
         return total_dist, dict(total_distances)
@@ -60,4 +60,4 @@ trackit = Trackit(test_data)
 activities_perc_by_time = trackit.get_activities()
 total_distance, total_distances_classes = trackit.get_distances()
 
-print(activities_perc_by_time)
+print(total_distances_classes)
