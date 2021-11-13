@@ -1,5 +1,5 @@
 1. - test_models.ipynb -
-   Data visualisation, preprocessing, testing and tuning models.
+   Data analisys & visualisation, preprocessing, testing and tuning models.
 
 2. - hipocratia.py -
    Helper file for data enhancement and training the best model.
