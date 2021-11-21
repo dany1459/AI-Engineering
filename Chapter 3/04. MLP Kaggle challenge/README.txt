@@ -4,10 +4,9 @@ model.py
 train.py
 predictor.py
 
-Steps for the user:
--> predictor.py
-
 More details in the notebook files and saved plots.
+
+
 
 Introduction
 
