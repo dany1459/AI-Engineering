@@ -8,12 +8,17 @@ from torch import nn, optim
 from torch.utils.data import random_split
 
 stocks_path = './02. MLP Regression/Stock_data/data/turkish_stocks.csv'
-        
-dataset = dh2.LoadData(stocks_path)
-train_samples = int(len(dataset) * .8)
-train_set, test_set = random_split(dataset, [train_samples, len(dataset) - train_samples])
-trainloader = DataLoader(dataset=train_set, batch_size=8, shuffle=True)
-testloader = DataLoader(dataset=test_set, batch_size=8)
+
+def load_data():        
+    dataset = dh2.LoadData(stocks_path)
+    train_samples = int(len(dataset) * .8)
+    train_set, test_set = random_split(dataset, [train_samples, len(dataset) - train_samples])
+    trainloader = DataLoader(dataset=train_set, batch_size=8, shuffle=True)
+    testloader = DataLoader(dataset=test_set, batch_size=8)
+
+    return trainloader, testloader
+
+trainloader, testloader = load_data()
 
 model = md.Network()
 criterion = nn.L1Loss()
