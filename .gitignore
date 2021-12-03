@@ -188,3 +188,8 @@ Chapter 3/03. DataLoader/datasets/my_datasets/train/pig/pig9.jpg
 Chapter 3/08. Contours, YOLO, DNN/models/yolov3.weights
 Chapter 3/09. Computer Vision Team Project/models/yolov3.weights
 Chapter 3/.vscode/settings.json
+Chapter 3/14. Semantic Prediction/.data/AmazonReviewFull/amazon_review_full_csv/readme.txt
+Chapter 3/14. Semantic Prediction/.data/AmazonReviewFull/amazon_review_full_csv/train.csv
+Chapter 3/14. Semantic Prediction/.vector_cache/wiki.simple.vec
+Chapter 3/14. Semantic Prediction/.vector_cache/wiki.simple.vec.pt
+Chapter 3/14. Semantic Prediction/test.csv
