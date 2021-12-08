@@ -193,3 +193,6 @@ Chapter 3/14. Semantic Prediction/.data/AmazonReviewFull/amazon_review_full_csv/
 Chapter 3/14. Semantic Prediction/.vector_cache/wiki.simple.vec
 Chapter 3/14. Semantic Prediction/.vector_cache/wiki.simple.vec.pt
 Chapter 3/14. Semantic Prediction/test.csv
+Chapter 3/.devcontainer/devcontainer.json
+Chapter 3/.devcontainer/Dockerfile
+Chapter 3/14. Semantic Prediction/train.csv
