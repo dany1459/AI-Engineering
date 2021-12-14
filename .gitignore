@@ -196,3 +196,6 @@ Chapter 3/14. Semantic Prediction/test.csv
 Chapter 3/.devcontainer/devcontainer.json
 Chapter 3/.devcontainer/Dockerfile
 Chapter 3/14. Semantic Prediction/train.csv
+Chapter 3/17. Cartoon Animation/models/coco.names
+Chapter 3/17. Cartoon Animation/models/yolov3.cfg
+Chapter 3/17. Cartoon Animation/models/yolov3.weights
