@@ -9,19 +9,15 @@ import a_data_loader as data_loader
 import b_model as md
 
 data = pd.read_csv('data/coordinates.csv')
-
-def load_data():
-    dataset = data_loader.LoadData(data)
-    train_samples = int(len(dataset) * 0.8)
-    train_set, test_set = random_split(dataset, [train_samples, len(dataset) - train_samples])
-    trainloader = DataLoader(dataset=train_set, batch_size=8, shuffle=True)
-    testloader = DataLoader(dataset=test_set, batch_size=8)
-    return trainloader, testloader
+dataset = data_loader.LoadData(data)
+train_samples = int(len(dataset) * 0.8)
+train_set, test_set = random_split(dataset, [train_samples, len(dataset) - train_samples])
+trainloader = DataLoader(dataset=train_set, batch_size=8, shuffle=True)
+testloader = DataLoader(dataset=test_set, batch_size=8)
 
 model = md.Network()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 criterion = nn.CrossEntropyLoss()
-trainloader, testloader = load_data()
 
 epochs = 20
 best_loss = float(np.inf)
