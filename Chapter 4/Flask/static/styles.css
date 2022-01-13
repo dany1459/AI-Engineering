@@ -1,0 +1,16 @@
+:root {
+    --background-color: #3a3335ff;
+    --primary-color: #f1f7edff;
+    --secondary-color: #e54b4bff;
+    --tertiary-color: #3bc14aff;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer {
+    margin-top: 50px;
+}
