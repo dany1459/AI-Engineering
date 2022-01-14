@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "components/card.html" import card %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+    <h1>Index</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {{card('static/logo.png', 'TITLE', 'DESCRIPTION')}}
+            </div>
+            <div class="col">
+                {{card('static/logo.png', 'TITLE', 'DESCRIPTION')}}
+            </div>
+            <div class="col">
+                {{card('static/logo.png', 'TITLE', 'DESCRIPTION')}}
+            </div>
+            <div class="col">
+                {{card('static/logo.png', 'TITLE', 'DESCRIPTION')}}
+            </div>
+            <div class="col">
+                {{card('static/logo.png', 'TITLE', 'DESCRIPTION')}}
+            </div>
+            <div class="col">
+                {{card('static/logo.png', 'TITLE', 'DESCRIPTION')}}
+            </div>
+        </div>
+    </div>
+
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/portfolio">Portfolio</a>
+{% endblock %}
