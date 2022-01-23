@@ -1,0 +1,12 @@
+{% macro card(cover_url,title,description,link) -%}
+<div class="card" style="margin-bottom:15px;">
+  <img src="{{cover_url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <p class="card-text">{{description}}</p>
+  </div>
+  <div class="card-body">
+    <a href="{{link}}" class="card-link">Learn more</a>
+  </div>
+</div>
+{%- endmacro %}

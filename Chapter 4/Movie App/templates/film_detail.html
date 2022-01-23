@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Film details{% endblock %}
+
+{% block content %}
+<div class="container flex">
+    <div class="film_details_page left">
+        <div class="card_film" style="width: 18rem;">
+            <img src={{movie.Poster}} class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">
+                    <h1>"{{movie['Title']}}"</h1>
+                    <h3>({{movie['Year']}})</h3>
+                    <a href='https://www.imdb.com/title/{{movie.imdbID}}/' target=_blank>More Details</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+
+        {% for comment in all_comments.data %}
+            <p class="comments">{{comment.text}}<span class="comment-date"> - ({{comment.created_at}})</span></p>
+        {% endfor %}
+
+        <form method="POST" class="form">
+            <h3>Post a Comment</h3>
+            <div class="form-group">
+                <label for="text">Message</label>
+                <textarea name="text" id="text" rows="3" class="form-control" placeholder="Your Comment"></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
