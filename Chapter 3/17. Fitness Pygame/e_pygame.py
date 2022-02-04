@@ -69,8 +69,8 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
                 while k < NUMBER_OF_BALOONS:
                     if BALOON_X_CHANGE[k] == 0:
                         BALOON_X_CHANGE[k] += 2
-                    if BALOON_X_CHANGE[k] == 0:
-                        BALOON_X_CHANGE[k] += 2
+                    if BALOON_Y_CHANGE[k] == 0:
+                        BALOON_Y_CHANGE[k] += 2
                     BALOON_X[k] += BALOON_X_CHANGE[k]
                     BALOON_Y[k] += BALOON_Y_CHANGE[k]
                     if BALOON_X[k] == 0 or BALOON_X[k] == SCREEN_WIDTH or BALOON_Y[k] == 0 or BALOON_Y[k] == SCREEN_HEIGHT:
