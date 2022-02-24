@@ -1,0 +1,94 @@
+-- --> find sales that are above average
+-- SELECT customer_id, 
+-- 	SUM(amount) AS total_spent_by_customer, 
+-- 	ROUND((SELECT ROUND(AVG(amount),2) FROM payment)) AS average 
+-- 	FROM payment
+-- 	GROUP BY customer_id
+-- 	HAVING SUM(amount) > (SELECT AVG(amount) FROM payment)
+-- 	ORDER BY total_spent_by_customer DESC;
+
+-- --> join payment and customer tables based on customer_id and order by payment_date
+-- SELECT customer.customer_id, first_name, last_name, amount, payment_date FROM customer
+-- 	INNER JOIN payment ON payment.customer_id = customer.customer_id
+-- 	ORDER BY payment_date DESC;
+-- > alternative < --
+-- SELECT customer_id, first_name, last_name, amount, payment_date FROM customer
+-- 	INNER JOIN payment USING(customer_id)
+-- 	ORDER BY payment_date DESC;
+
+-- --> join multiple tables (4)
+-- SELECT customer.customer_id, 
+-- 	customer.first_name AS customer_first_name, 
+-- 	customer.last_name AS customer_last_name, 
+-- 	staff.first_name AS staff_first_name, 
+-- 	staff.last_name AS staff_last_name, 
+-- 	payment.amount, 
+-- 	payment.payment_date,
+-- 	rental.rental_date,
+-- 	rental.return_date 
+--  FROM customer
+-- 	JOIN payment ON payment.customer_id = customer.customer_id
+-- 	JOIN staff ON payment.staff_id = staff.staff_id
+-- 	JOIN rental ON payment.rental_id = rental.rental_id
+-- 	ORDER BY payment.payment_date DESC;
+
+-- --> Q1. select film title, description and release year, join category table
+-- SELECT film_category.film_id,
+-- 	film_category.category_id,
+-- 	category.name AS genre,
+-- 	film.title || ' ' || film.description || ' ' || film.release_year AS film_details
+-- 	FROM film_category
+-- 	JOIN category ON category.category_id = film_category.category_id
+-- 	JOIN film ON film.film_id = film_category.film_id
+
+-- --> Q2. select customer and their address, join country and city tables
+-- SELECT customer.first_name || ' ' || customer.last_name as customer_full_name,
+-- 	address.address,
+-- 	city.city || ' ' || country.country as city_and_country
+-- 	FROM address
+-- 	JOIN customer ON address.address_id = customer.address_id
+-- 	JOIN city ON city.city_id = address.city_id
+-- 	JOIN country ON country.country_id = city.country_id
+
+-- --> Q3. Select all payments info including staff info, customer info, and rental info.
+-- SELECT payment.staff_id,
+-- 	payment.customer_id,
+-- 	payment.rental_id,
+-- 	payment.amount,
+-- 	payment.payment_date,
+-- 	staff.first_name || ' ' || staff.last_name AS staff_full_name,
+-- 	customer.first_name || ' ' || customer.last_name AS customer_full_name
+-- 	FROM payment
+-- 	JOIN staff ON staff.staff_id = payment.staff_id
+-- 	JOIN customer ON customer.customer_id = payment.customer_id
+-- 	JOIN rental ON rental.rental_id = payment.rental_id
+	
+-- --> Q4. Select all the actors and films and join them
+-- SELECT
+-- 	actor.first_name || ' ' || actor.last_name as actor_name,
+-- 	film.title
+-- 	FROM film_actor
+-- 	JOIN actor ON actor.actor_id = film_actor.actor_id
+-- 	JOIN film ON film.film_id = film_actor.film_id
+-- 	GROUP BY actor.actor_id, film.film_id 
+-- 	HAVING film.film_id = 3;
+
+-- --> Q5. Select all the stores with addresses and manager staff name last name.
+-- SELECT 
+-- 	store.manager_staff_id,
+-- 	staff.first_name || ' ' || staff.last_name AS staff_full_name,
+-- 	address.address
+-- 	FROM store
+-- 	JOIN address ON address.address_id = store.address_id
+-- 	JOIN staff ON staff.store_id = store.store_id
+
+-- --> Q6. In this store, every worker receives 1500 $ base salary
+-- -- After the 5000th movie, they get a bonus of 0.1 euro for every movie they rent.
+-- -- Calculate total bonus that is received by staff members and join their names and last_names
+-- SELECT 
+-- 	((COUNT (payment.payment_id) - 5000) * 0.1) AS bonus,
+-- 	staff.first_name || ' ' || staff.last_name AS staff_full_name
+-- 	FROM payment
+-- 	INNER JOIN staff USING(staff_id)
+-- 	GROUP BY staff_full_name;
+
