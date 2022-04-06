@@ -77,4 +77,4 @@ def predict_pose(x=0):
     cap.release()
     cv2.destroyAllWindows()
 
-# predict_pose(test_video)
+predict_pose(test_video)
