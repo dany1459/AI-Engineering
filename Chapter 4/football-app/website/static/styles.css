@@ -1,0 +1,44 @@
+:root {
+    --background-color: #252627;
+    --primary-color: #f1f7edff;
+    --secondary-color: #85877C;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--background-color);
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color: var(--primary-color);
+}
+
+a {
+    color: silver;
+}
+
+.header-main {
+    display: flex;
+    flex-direction: column-reverse;
+    background-image: url('profile_background.jpg');
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.footer {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
