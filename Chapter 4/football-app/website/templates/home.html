@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<header class="header-main">
+    <img src="static/profile_picture.jpg" style="max-width: 200px; border-radius: 100px;">
+</header>
+
+    <h1>Dan Adrian Dobre</h1>
+    <br>
+
+    <h3>About Me</h3>
+    <p>I am a data scientist with a passion for football, cooking and traveling.</p>
+    <p>Want to see who will win the next big match in English football?</p>
+    <p><a href="/predict"> -> Try it out <- </a></p>
+    <br>
+
+    <h3>Education</h3>
+    <div class="container" align="center">
+        <div class="row">
+            <div class="col">"Al. D. Ghica" College<br>2003 - 2007</div>
+            <div class="col">"Carol Davila" University<br>2007 - 2013</div>
+            <div class="col">Strive School<br>2021 - 2022</div>
+        </div>
+    </div>
+    <br>
+
+    <h3>Work Experience</h3>
+    <div class="container" align="center">
+        <div class="row">
+            <div class="col">Hornsjoe Hoyfjellshotell<br>2014 - 2016<br>Chef</div>
+            <div class="col">DAPP Zambia<br>2016 - 2017<br>Volunteer</div>
+            <div class="col">Flash Harry's<br>2018 - 2020<br>Head Chef</div>
+        </div>
+    </div>
+    <br>
+{% endblock %}
